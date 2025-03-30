@@ -1,9 +1,11 @@
 fileFormatVersion: 2
-guid: 99ead0ab8ad24af4286ded0d81578cf1
+guid: 2487904d1e90c924dba25537adecb842
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - snakeData: {instanceID: 0}
+  - bodyPrefab: {instanceID: 0}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
