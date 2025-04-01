@@ -12,7 +12,7 @@ public class SingletonPersistent <T>: MonoBehaviour
         if (instance == null)
         {
             instance = this as T;
-            DontDestroyOnLoad(this);
+            DontDestroyOnLoad(gameObject);
         }
         else
         {

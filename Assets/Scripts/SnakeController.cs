@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class SnakeController : MonoBehaviour
 {
-    [SerializeField] public SnakeData snakeData;
-    [SerializeField] public Transform bodyPrefab;
+    [SerializeField] private SnakeData snakeData;
+    [SerializeField] private Transform bodyPrefab;
     private InputHandler inputHandler;
 
     private Vector2 direction;
@@ -65,6 +65,7 @@ public class SnakeController : MonoBehaviour
                     Grow();
 
                     SpriteRenderer headRenderer = GetComponentInChildren<SpriteRenderer>();
+                
                     if (headRenderer != null)
                     {
                         headRenderer.color = selectedFood.FoodColor;
@@ -77,8 +78,8 @@ public class SnakeController : MonoBehaviour
                         {
                             segmentRenderer.color = selectedFood.FoodColor;
                         }
-                    } 
-
+                    }
+                    AudioManager.instance.PlayFoodSFX();
                     Destroy(collision.gameObject);
                     FoodSpawner.Instance.SpawnFood();
                     GameManager.Instance.AddScore(selectedFood.ScoreValue);

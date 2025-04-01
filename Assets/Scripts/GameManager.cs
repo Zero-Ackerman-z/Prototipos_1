@@ -4,20 +4,14 @@ using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+public class GameManager : SingletonNotPersistent<GameManager>
 {
-    public static GameManager Instance { get; private set; }
     private int score;
     public bool IsGamePaused { get; private set; }
 
     public delegate void ScoreChanged(int newScore);
     public static event ScoreChanged OnScoreChanged;
 
-    private void Awake()
-    {
-        if (Instance == null) Instance = this;
-        else Destroy(gameObject);
-    }
     private void Start()
     {
         SnakeController.OnGameOver += GameOver;
@@ -28,7 +22,6 @@ public class GameManager : MonoBehaviour
         IsGamePaused = true;
         Time.timeScale = 0;
     }
-
     public void AddScore(int points)
     {
         score += points;

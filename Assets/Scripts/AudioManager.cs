@@ -2,17 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AudioManager : MonoBehaviour
+public class AudioManager : SingletonPersistent<AudioManager>
 {
-    // Start is called before the first frame update
-    void Start()
+    [SerializeField] private AudioSource backgroundMusic;
+    [SerializeField] private AudioSource sfxSource;
+    [SerializeField] private AudioClip foodSFX;
+    private bool isOn = true;
+    public void PlaySFX(AudioClip clip)
     {
-        
+        if (sfxSource != null && clip != null)
+            sfxSource.PlayOneShot(clip);
+    }
+    public void PlayFoodSFX()
+    {
+        if (sfxSource != null && foodSFX != null)
+            sfxSource.PlayOneShot(foodSFX);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void PlayBackgroundMusic(AudioClip clip)
     {
-        
+        if (backgroundMusic != null && clip != null)
+        {
+            if (backgroundMusic.clip != clip)
+            {
+                backgroundMusic.clip = clip;
+                backgroundMusic.Play();
+            }
+        }
+    }
+
+    public void ToggleMusic()
+    {
+        if (backgroundMusic != null)
+        {
+            isOn = !isOn;  
+            backgroundMusic.mute = !isOn;  
+        }
     }
 }
